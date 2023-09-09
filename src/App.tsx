@@ -18,33 +18,12 @@ function App() {
   const [arg, setArg] = useState('');
   const { data, isLoading, error } = useGetIpQuery(arg);
   // const {data2,isLoading2,error2} = useGetIpQuery('1111')
-  const [myIp, setMyIp] = useState<string>('');
-  const [animated, setAnimated] = useState<boolean>(false);
-  const [value, setValue] = useState('');
 
-  useEffect(() => {
-    fetchMyIp();
-  }, []);
 
-  const handleInput = (e) => {
-    const text = e.target.value;
-    setValue(text);
-  };
 
-  const fetchMyIp = async () => {
-    const data2: fetchType = await axios.get('https://api.ipify.org/?format=json');
-    console.log(data2.data.ip);
-    setMyIp(data2.data.ip);
-  };
 
-  const toogleAnimated = () => {
-    setAnimated((prev) => !prev);
-    fetchMyIp();
-    setArg('');
-  };
-  const otherIp = () => {
-    setArg(value);
-  };
+  
+
 
   if (!data) {
     return <div>Идет загрузка...</div>;

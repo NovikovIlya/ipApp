@@ -27,4 +27,17 @@ export const productApi = createApi({
     }),
 })
 
+export const cityApi = createApi({
+    reducerPath: 'apiCity',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.unsplash.com/' }),
+    endpoints: (builder) => ({
+      fetchCity: builder.query<any, any>({
+        query: (cityFetch) => ({
+          url: `search/photos?query=${cityFetch}&client_id=kW741H2E_EGpTnjeNNm4_CczBL3V12Wud_S1GOAyGzo`,
+        }),
+      }),
+    }),
+})
+
 export const {useGetIpQuery} = productApi
+export const {useFetchCityQuery} = cityApi

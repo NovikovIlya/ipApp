@@ -1,0 +1,57 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.item {
+  display: flex;
+  flex-wrap: wrap;
+
+  &_link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    &_item {
+      width: 30%;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      background-color: rgb(223, 223, 223);
+      border: 1px solid black;
+      color: black;
+    }
+  }
+
+  &_value {
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    &_item{
+        display: flex;
+        justify-content: center;
+    }
+  }
+  &_id{
+    width: 100%;
+  }
+  &_country{
+    width: 100%;
+  }
+  &_reg{
+    width: 100%;
+  }
+  &_city{
+    width: 100%;
+  }
+  &_index{
+    width: 100%;
+  }
+  &_prov{
+    width: 100%;
+  }
+  &_img{
+    width: 30%;
+  }
+}
