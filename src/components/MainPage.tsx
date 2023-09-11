@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import styles from './MainPage.module.scss';
 import { useGetIpQuery, productApi } from '../store/infoIpData';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import sliceId, { addItem } from '../store/sliceId';
-
+import { useAppDispatch } from '../store/redux';
+import { useAppSelector } from '../store/redux';
+import sliceId, { addItem, addFavorites } from '../store/sliceId';
 import { addAnim } from '../store/sliceId';
+import Favorite from './Favorite';
 
 function MainPage() {
   const [arg, setArg] = useState('');
   const { data, isLoading, error } = useGetIpQuery(arg);
   const [value, setValue] = useState('');
-  const dispatch = useDispatch();
-  // const valueId = useSelector((state: any) => state.sliceId.value);
-  const animaValue = useSelector((state: any) => state.sliceId.anim);
+
+  const dispatch = useAppDispatch();
+
+  const animaValue = useAppSelector((state) => state.sliceId.anim);
   const navigate = useNavigate();
+  const valueId = useAppSelector((state) => state.sliceId.value);
+  const favorites = useAppSelector((state) => state.sliceId.favorites);
 
   const handleInput = (e) => {
     const text = e.target.value;
     dispatch(addItem(text));
     setValue(text);
   };
-
   const otherIp = () => {
     if (value.length >= 1) {
       anima();
@@ -45,6 +47,11 @@ function MainPage() {
       dispatch(addAnim());
     }
   };
+  const favorite = () => {
+    const text = valueId;
+    dispatch(addFavorites(text));
+    console.log('111', favorites);
+  };
 
   if (!data) {
     return <div>Идет загрузка...</div>;
@@ -53,11 +60,9 @@ function MainPage() {
   return (
     <div className="App">
       <div className={styles.myIp}>
-      
-          <Link className={styles['myIp__cihld']} to="pageip" onClick={myIpData}>
-            Узнать тайну своего ip!
-          </Link>
-        
+        <Link className={styles['myIp__cihld']} to="pageip" onClick={myIpData}>
+          Узнать тайну своего ip!
+        </Link>
       </div>
 
       <div className={styles.otherIp}>
@@ -70,6 +75,19 @@ function MainPage() {
         <button className={styles.otherIp__btn} onClick={otherIp}>
           Узнать другую тайну!
         </button>
+        <button className={styles.otherIp__btn} onClick={favorite}>
+          Добавить в избронное
+        </button>
+      </div>
+      <div>
+        <h1>Избранное</h1>
+        <div>
+          {favorites.map((favorite) => (
+            <div  key={favorite.id}>
+              <Favorite name={favorite.name} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
