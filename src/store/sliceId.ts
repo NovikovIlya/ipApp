@@ -30,8 +30,11 @@ export const sliceId = createSlice({
     addAnim: (state) => {
       state.anim = !state.anim;
     },
+    deleteItem: (state) => {
+      state.value = '';
+    },
   },
 });
 
-export const { addItem, addAnim, addFavorites, deleteFavorites, editFavorites } = sliceId.actions;
+export const { addItem, addAnim, addFavorites, deleteFavorites, editFavorites,deleteItem } = sliceId.actions;
 export default sliceId.reducer;

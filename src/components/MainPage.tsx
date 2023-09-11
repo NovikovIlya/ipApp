@@ -5,7 +5,7 @@ import { useGetIpQuery, productApi } from '../store/infoIpData';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store/redux';
 import { useAppSelector } from '../store/redux';
-import sliceId, { addItem, addFavorites } from '../store/sliceId';
+import sliceId, { addItem, addFavorites,deleteItem } from '../store/sliceId';
 import { addAnim } from '../store/sliceId';
 import Favorite from './Favorite';
 
@@ -24,7 +24,7 @@ function MainPage() {
   const handleInput = (e) => {
     const text = e.target.value;
     dispatch(addItem(text));
-    setValue(text);
+    // setValue(text);
   };
   const otherIp = () => {
     if (value.length >= 1) {
@@ -51,6 +51,9 @@ function MainPage() {
     const text = valueId;
     dispatch(addFavorites(text));
     console.log('111', favorites);
+    // setValue('')
+    dispatch(deleteItem())
+
   };
 
   if (!data) {
@@ -69,7 +72,7 @@ function MainPage() {
         <input
           className={styles.otherIp__input}
           onChange={handleInput}
-          value={value}
+          value={valueId}
           placeholder="Впиши"
         />
         <button className={styles.otherIp__btn} onClick={otherIp}>
@@ -79,8 +82,8 @@ function MainPage() {
           Добавить в избронное
         </button>
       </div>
-      <div>
-        <h1>Избранное</h1>
+      <div className={styles.favorite}>
+        <h1 className={styles.favorite__head}>Избранное</h1>
         <div>
           {favorites.map((favorite) => (
             <div  key={favorite.id}>

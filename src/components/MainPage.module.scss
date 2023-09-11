@@ -33,4 +33,15 @@
         width: 10%;
        
     }
+    
+}
+.favorite{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    &__head{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
 }
